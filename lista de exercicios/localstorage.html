@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            background-color: lightblue;
+        }
+        body{
+           color: rgb(16, 124, 160);
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           min-height: 100svh;
+           flex-direction: column;
+        }
+       
+
+    </style>
+</head>
+<body>
+    <input id="nota" type="text">
+    <button id="salvar">salvar</button>
+    <ul>
+
+    </ul>
+    <script>
+        let inputnota=document.querySelector("#nota");
+        let bntsalvar=document.querySelector("#salvar");
+        let lista=document.querySelector("ul");
+        let contador=0;
+        //let notas=[];
+        
+        bntsalvar.addEventListener("click", ()=>{
+            //notas
+            contador++;
+            localStorage.setItem(contador, inputnota.value); // cria um novo elemento no DOM do tipo <li>
+            let li=document.createElement("li"); 
+            li.innerText=inputnota.value; //copia valor de li
+            lista.appendChild(li); // adiciona o elemento como filho do ul,
+            inputnota.value="";
+            });
+        
+
+
+    </script>
+</body>
+</html>

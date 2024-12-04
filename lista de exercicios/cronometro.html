@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <span id="hora"></span>
+    <span id="minuto"></span>
+    <span id="segundo"></span>
+    <span id="milisegundo"></span>
+
+
+    <script>
+        let spanhora=document.getElementById("hora");
+        let spanminuto=document.getElementById("minuto");
+        let spansegundo=document.getElementById("segundo");
+        let spanmilisegundo=document.getElementById("milisegundo");
+        let agora;
+        let run=true;
+        let intervalo;
+
+        function atualizaRelogio(){
+            agora=new Date();
+            spanhora.innerHTML=agora.getHours();
+            spanminuto.innerHTML=agora.getMinutes();
+            spansegundo.innerHTML=agora.getSeconds();
+            spanmilisegundo.innerHTML=agora.getMilliseconds();
+
+        }
+        document.addEventListener("DOMContentLoaded",()=>{
+            if(run){
+                intervalo=setInterval(atualizaRelogio,1);
+                run=false;
+            }else{
+                clearInterval(intervalo);
+                run=true;
+            }
+        });
+        document.addEventListener("keydown", ()=>{
+            if(run){
+                intervalo=setInterval(atualizaRelogio,1);
+                run=false;
+            }else{
+                clearInterval(intervalo);
+                run=true;
+            }
+        });
+    </script>
+</body>
+</html>
