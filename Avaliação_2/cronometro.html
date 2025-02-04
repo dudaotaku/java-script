@@ -55,7 +55,7 @@
     <div class="container">
 
 
-        <h1 id="relogio">00:00:00:000</h1>
+        <h1 id="cronometro">00:00:00:000</h1>
         <button onclick="iniciar()">Iniciar</button>
         <button onclick="pausar()">Pausar</button>
         <button onclick="parar()">Parar</button>
@@ -82,7 +82,7 @@
                     let segundos = agora.getSeconds().toString().padStart(2, '0');
                     let milisegundos = agora.getMilliseconds().toString().padStart(3, '0');
 
-                    document.getElementById("relogio").innerHTML = `${hora}:${minutos}:${segundos}:${milisegundos}`; //podeia ter sido usado neste formato tbm = hora + ":" + minutos + ":" + segundos + ":" + milisegundos
+                    document.getElementById("cronometro").innerHTML = `${hora}:${minutos}:${segundos}:${milisegundos}`; //podeia ter sido usado neste formato tbm = hora + ":" + minutos + ":" + segundos + ":" + milisegundos
                 }, 10);
             }
 
@@ -99,12 +99,14 @@
         function parar() {
             clearInterval(intervalo);
             rodando = false;
-            document.getElementById("relogio").innerHTML = "00:00:00:000";
+            document.getElementById("cronometro").innerHTML = "00:00:00:000";
             lista.innerHTML = "";
+            contator.innerHTML = "";
+
         }
 
         function registrarPausa() {
-            let tempoAtual = document.getElementById("relogio").innerText;
+            let tempoAtual = document.getElementById("cronometro").innerText;
             contador++;
 
             let li = document.createElement("li");

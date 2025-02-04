@@ -1,32 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sorteio de Número</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }        
+    </style>
 </head>
 <body>
-    <h2>Informe o intervalo desejado</h2>
-    <label for="a">Informa A</label>
-    <input type="text" id="a">
-    <label for="b">Informa B</label>
-    <input type="text" id="b">
 
-    <button>Soma</button>
-
-    <p id="resultado"></p>
+    <div class="container">
+        <h2>Sortear um número</h2>
+        <label>Minimo: <input  id="min" ></label>
+        <br>
+        <br>
+        <label>Máximo: <input  id="max" ></label>
+        <br>
+        <br>
+        <button onclick="sortearNumero()">Sortear</button>
+        <p id="resultado"></p>
+    </div>
 
     <script>
-        let inputa=document.querySelector("#a");
-        let inputb=document.querySelector("#b");
-        let btn=document.querySelector("button");
-        let pResultado=document.querySelector("#resultado");
+        function sortearNumero() {
+            let min = parseInt(document.getElementById("min").value);
+            let max = parseInt(document.getElementById("max").value);
 
-        btn.addEventListener("click",()=>{
-            let a=Number.parseInt(inputa.value);
-            let b=Number.parseInt(inputb.value);
-            pResultado.innerHTML=Math.trunc(Math.random(a, b)*10);
-        })
+            if (isNaN(min) || isNaN(max) || min >= max) {
+                document.getElementById("resultado").textContent = "Insira um intervalo valido";
+                return;
+            }
+
+            let numeroSorteado = Math.floor(Math.random() * (max - min + 1)) + min;
+            document.getElementById("resultado").textContent = `Número aleatorio: ${numeroSorteado}`;
+        }
     </script>
+
 </body>
 </html>

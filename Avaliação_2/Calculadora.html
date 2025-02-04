@@ -46,43 +46,43 @@
         <input type="text" id="display" class="form-control" >
 
         <div class="row g-2">
-            <div class="col-3"><button class="btn btn-danger w-100" onclick="clearDisplay()">C</button></div>
-            <div class="col-3"><button class="btn btn-light w-100" onclick="appendToDisplay('*')">*</button></div>
-            <div class="col-3"><button class="btn btn-light w-100" onclick="appendToDisplay('/')">/</button></div>
-            <div class="col-3"><button class="btn btn-light w-100" onclick="appendToDisplay('-')">-</button></div>
+            <div class="col-3"><button class="btn btn-danger w-100" onclick=" limparDisplay()">C</button></div>
+            <div class="col-3"><button class="btn btn-light w-100" onclick="adicionarDisplay('*')">*</button></div>
+            <div class="col-3"><button class="btn btn-light w-100" onclick="adicionarDisplay('/')">/</button></div>
+            <div class="col-3"><button class="btn btn-light w-100" onclick="adicionarDisplay('-')">-</button></div>
 
-            <div class="col-3"><button class="btn btn-light w-100 " onclick="appendToDisplay('7')">7</button></div>
-            <div class="col-3"><button class="btn btn-light w-100" onclick="appendToDisplay('8')">8</button></div>
-            <div class="col-3"><button class="btn btn-light w-100" onclick="appendToDisplay('9')">9</button></div>
-            <div class="col-3"><button class="btn btn-light w-100" onclick="appendToDisplay('+')">+</button></div>
+            <div class="col-3"><button class="btn btn-light w-100 " onclick="adicionarDisplay('7')">7</button></div>
+            <div class="col-3"><button class="btn btn-light w-100" onclick="adicionarDisplay('8')">8</button></div>
+            <div class="col-3"><button class="btn btn-light w-100" onclick="adicionarDisplay('9')">9</button></div>
+            <div class="col-3"><button class="btn btn-light w-100" onclick="adicionarDisplay('+')">+</button></div>
 
 
-            <div class="col-3"><button class="btn btn-light w-100" onclick="appendToDisplay('4')">4</button></div>
-            <div class="col-3"><button class="btn btn-light w-100" onclick="appendToDisplay('5')">5</button></div>
-            <div class="col-3"><button class="btn btn-light w-100" onclick="appendToDisplay('6')">6</button></div>
-            <div class="col-3"><button class="btn btn-light w-100" onclick="appendToDisplay('.')">.</button></div>
+            <div class="col-3"><button class="btn btn-light w-100" onclick="adicionarDisplay('4')">4</button></div>
+            <div class="col-3"><button class="btn btn-light w-100" onclick="adicionarDisplay('5')">5</button></div>
+            <div class="col-3"><button class="btn btn-light w-100" onclick="adicionarDisplay('6')">6</button></div>
+            <div class="col-3"><button class="btn btn-light w-100" onclick="adicionarDisplay('.')">.</button></div>
 
-            <div class="col-3"><button class="btn btn-light w-100" onclick="appendToDisplay('1')">1</button></div>
-            <div class="col-3"><button class="btn btn-light w-100" onclick="appendToDisplay('2')">2</button></div>
-            <div class="col-3"><button class="btn btn-light w-100" onclick="appendToDisplay('3')">3</button></div>
-            <div class="col-3 "><button class="btn btn-primary w-100" onclick="calculateResult()">=</button></div>
+            <div class="col-3"><button class="btn btn-light w-100" onclick="adicionarDisplay('1')">1</button></div>
+            <div class="col-3"><button class="btn btn-light w-100" onclick="adicionarDisplay('2')">2</button></div>
+            <div class="col-3"><button class="btn btn-light w-100" onclick="adicionarDisplay('3')">3</button></div>
+            <div class="col-3 "><button class="btn btn-primary w-100" onclick="calcularResultado()">=</button></div>
 
-            <div class="col-3"><button class="btn btn-light w-100" onclick="appendToDisplay('0')">0</button></div>
+            <div class="col-3"><button class="btn btn-light w-100" onclick="adicionarDisplay('0')">0</button></div>
 
 
         </div>
     </div>
 
     <script>
-        function appendToDisplay(value) {
+        function adicionarDisplay(value) {
             document.getElementById("display").value += value;
         }
         
-        function clearDisplay() {
+        function limparDisplay() {
             document.getElementById("display").value = "";
         }
         
-        function calculateResult() {
+        function calcularResultado() {
             let expression = document.getElementById("display").value;
             if (/^[0-9+\-*/.]+$/.test(expression)) {
                 try {
@@ -101,11 +101,11 @@
 
             if(allowedkeys.includes(key)){
                 if (key == 'Enter'){
-                    calculateResult();
+                    calcularResultado();
                 }else if (key == 'Backspace'){
-                    clearDisplay();
+                    limparDisplay();
                 }else{
-                    appendToDisplay(key);
+                    adicionarDisplay(key);
                 }
             }
 
