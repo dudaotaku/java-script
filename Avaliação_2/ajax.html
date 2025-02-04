@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: rgb(223, 223, 250);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        h1{
+            text-align: center;
+            color: rgb(117, 117, 245);
+        }
+
+        #procurar {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .listaFilme {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .itensFilme {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            width: 250px;
+            text-align: center;
+        }
+
+        .itensFilme img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .tituloFilme {
+            font-size: 18px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .anoFilme {
+            font-size: 14px;
+            color: gray;
+        }
+
+        .sinopse {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+        input{
+            border: 1px solid rgb(117, 117, 245);
+            border-radius: 7px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Buscar filmes</h1>
+        <input type="text" id="procurar" placeholder="Digite o nome do filme desejado ">
+        <div class="listaFilme" id="listaFilme"></div>
+    </div>
+
+    <script>
+
+        document.getElementById("procurar").addEventListener("input", function(){
+            let consultar = this.value;
+
+            if(consultar.length > 2) { 
+
+                buscarFilme(consultar);
+            }else{
+
+                document.getElementById("listaFilme").innerHTML="";
+            }
+        });
+
+        function buscarFilme(consultar){
+            const apiKey = "57a1f0153906f44c0f1ed1dc2f700c89";
+            const url = `https://api.themoviedb.org/3/search/movie?query=${consultar}&api_key=${apiKey}&language=pt-BR`;
+            fetch(url)
+               .then(response => response.json())
+               .then (data => {
+
+                if (data.results && data.results.length > 0){
+
+                    exibirFilmes (data.results);
+
+                }else{
+
+                    document.getElementById("listaFilme").innerHTML = '<P> Nenhum filme encontrado.<p>';
+
+                }
+               });
+
+               function exibirFilmes (filmes) {
+                const listaDeFilme = document.getElementById("listaFilme");
+                listaDeFilme.innerHTML = "";
+
+                filmes.forEach (filme => {
+
+                    const itensFilme = document.createElement("div");
+                    itensFilme.classList.add("itensFilme");
+
+                    const imagemFilme = document.createElement("img");
+                    imagemFilme.src = filme.poster_path ? `https://image.tmdb.org/t/p/w500${filme.poster_path}` : "https://via.placeholder.com/150";
+
+                    const tituloFilme = document.createElement("div");
+                    tituloFilme.classList.add("tituloFilme");
+                    tituloFilme.textContent = filme.title;
+
+                    const anoFilme = document.createElement("div");
+                    anoFilme.classList.add("anoFilme");
+                    anoFilme.textContent = filme.release_date ? filme.release_date.substring(0,4): "Ano não disponivel";
+
+                    const sinopse = document.createElement("div");
+                    sinopse.classList.add("sinopse");
+                    sinopse.textContent = filme.overview ? filme.overview.substring(0,100) + "..." : "Sem descrição disponível";
+
+                    itensFilme.appendChild(imagemFilme);
+                    itensFilme.appendChild(tituloFilme);
+                    itensFilme.appendChild(anoFilme);
+                    itensFilme.appendChild(sinopse);
+
+                    listaDeFilme.appendChild(itensFilme);
+
+                })
+
+               }
+
+
+        }
+    </script>
+</body>
+</html>

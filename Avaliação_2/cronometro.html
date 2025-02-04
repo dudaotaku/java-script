@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            align-content: center;
+            align-items: center;
+        }
+
+        .container {
+
+            justify-items: center;
+            width: 300px;
+            height: 350px;
+            background-color: rgb(203, 217, 248);
+            color: white;
+            border-radius: 15px;
+            text-align: center;
+            padding: 20px;
+        }
+
+
+        button {
+            padding: 1em;
+            width: 6em;
+        }
+
+        #iniciar {
+            background-color: rgb(150, 150, 199);
+            color: white;
+            border: none;
+        }
+
+        #pausar {
+            background-color: rgb(192, 188, 188);
+            color: white;
+            border: none;
+
+        }
+
+        #parar {
+            background-color: rgb(204, 113, 113);
+            color: white;
+            border: none;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+
+        <h1 id="relogio">00:00:00:000</h1>
+        <button onclick="iniciar()">Iniciar</button>
+        <button onclick="pausar()">Pausar</button>
+        <button onclick="parar()">Parar</button>
+        <ul>
+
+        </ul>
+
+
+    </div>
+    <script>
+        let intervalo;
+        let rodando = false;
+        let lista=document.querySelector("ul");
+        let contador=0;
+
+        function iniciar() {
+
+            if (!rodando) {
+                rodando = true;
+                intervalo = setInterval(() => {
+                    let agora = new Date();
+                    let hora = agora.getHours().toString().padStart(2, '0');
+                    let minutos = agora.getMinutes().toString().padStart(2, '0');
+                    let segundos = agora.getSeconds().toString().padStart(2, '0');
+                    let milisegundos = agora.getMilliseconds().toString().padStart(3, '0');
+
+                    document.getElementById("relogio").innerHTML = `${hora}:${minutos}:${segundos}:${milisegundos}`; //podeia ter sido usado neste formato tbm = hora + ":" + minutos + ":" + segundos + ":" + milisegundos
+                }, 10);
+            }
+
+        }
+
+        function pausar() {
+            clearInterval(intervalo);
+            rodando = false;
+            
+            registrarPausa();
+
+        }
+
+        function parar() {
+            clearInterval(intervalo);
+            rodando = false;
+            document.getElementById("relogio").innerHTML = "00:00:00:000";
+            lista.innerHTML = "";
+        }
+
+        function registrarPausa() {
+            let tempoAtual = document.getElementById("relogio").innerText;
+            contador++;
+
+            let li = document.createElement("li");
+            li.innerText = `${contador}: ${tempoAtual}`;
+            lista.appendChild(li);
+        }
+
+    </script>
+</body>
+
+</html>
+
+
+
+
+
