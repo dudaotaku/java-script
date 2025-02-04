@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteio de Números</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            background-color: #b8d1f1;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f8f9fa;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3>Sorteio de Números</h3>
+        <button onclick="sortearNumero()">Sortear Número</button>
+        <ul id="lista-numeros"></ul>
+    </div>
+
+    <script>
+        let numerosSorteados = [];
+
+        function sortearNumero() {
+
+            const numeroSorteado = Math.floor(Math.random() * 101);
+
+
+            numerosSorteados.push(numeroSorteado);
+
+
+            exibirNumeros();
+        }
+
+        function exibirNumeros() {
+            const lista = document.getElementById("lista-numeros");
+            lista.innerHTML = "";
+
+
+            numerosSorteados.forEach((numero, index) => {
+                const itemLista = document.createElement("li");
+                itemLista.textContent = `${index + 1} = ${numero}`;
+                lista.appendChild(itemLista);
+            });
+        }
+    </script>
+</body>
+
+</html>

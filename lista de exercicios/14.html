@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paleta de Cores</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #EBF2FA;
+        }
+
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .color-box {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="color-box" id="box1">#05668D</div>
+        <div class="color-box" id="box2">#427AA1</div>
+        <div class="color-box" id="box3" style="color: black;">#EBF2FA</div>
+        <div class="color-box" id="box4">#679436</div>
+        <div class="color-box" id="box5">#A5BE00</div>
+    </div>
+
+    <script>
+        function gerarCorAleatoria() {
+            return '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0').toUpperCase();
+        }
+
+        function randomizarCores() {
+            document.querySelectorAll('.color-box').forEach(box => {
+                const novaCor = gerarCorAleatoria();
+                box.style.backgroundColor = novaCor;
+                box.textContent = novaCor;
+
+               
+                const corHex = parseInt(novaCor.replace("#", ""), 16);
+                const media = (corHex >> 16) * 0.299 + ((corHex >> 8) & 0xFF) * 0.587 + (corHex & 0xFF) * 0.114;
+                box.style.color = media > 128 ? "black" : "white";
+            });
+        }
+
+        document.addEventListener("keydown", function(event) {
+            if (event.code === "Space") {
+                event.preventDefault();
+                randomizarCores();
+            }
+        });
+    </script>
+
+</body>
+</html>

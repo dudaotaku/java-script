@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteador de Números</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background: rgb(203, 217, 248);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        input {
+            width: 80px;
+            margin: 5px;
+            text-align: center;
+        }
+
+        button {
+            background: rgb(150, 150, 199);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: white;
+            padding: 5px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h3>Sorteador de Números</h3>
+        <input type="number" id="min" placeholder="Mínimo">
+        <input type="number" id="max" placeholder="Máximo">
+        <button onclick="sortear()">Sortear</button>
+        <h3 id="resultado"></h3>
+        <ul id="historico"></ul>
+    </div>
+
+    <script>
+        const historico = [];
+
+        function sortear() {
+            const min = +document.getElementById("min").value;
+            const max = +document.getElementById("max").value;
+
+            if (min >= max) return alert("Intervalo inválido!");
+
+            const numero = Math.floor(Math.random() * (max - min + 1)) + min;
+            document.getElementById("resultado").innerText = `${numero}`;
+
+            historico.push({ min, max, numero });
+
+            document.getElementById("historico").innerHTML += `<li>${min} - ${max} | ${numero}</li>`;
+        }
+    </script>
+
+</body>
+
+</html>

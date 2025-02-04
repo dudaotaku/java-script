@@ -3,9 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Verificar Tipo de Dado</title>
 </head>
 <body>
-    
+    <h2>Verificar Tipo de Dado</h2>
+    <input type="text" id="valor" placeholder="Digite algo...">
+    <button onclick="verificarTipo()">Verificar</button>
+    <p id="resultado"></p>
+
+    <script>
+        function verificarTipo() {
+            let valor = document.getElementById("valor").value;
+            let tipo;
+
+            if (!isNaN(valor) && valor.trim() !== "") {
+                tipo = "number";
+            } else if (valor.toLowerCase() === "true" || valor.toLowerCase() === "false") {
+                tipo = "boolean";
+            } else {
+                tipo = "string";
+            }
+
+            document.getElementById("resultado").innerText = "Tipo: " + tipo;
+        }
+    </script>
 </body>
 </html>
